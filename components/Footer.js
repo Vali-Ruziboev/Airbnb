@@ -31,7 +31,7 @@ const Footer = () => {
             <div className="space-y-4 text-xs text-gray-800">
                 <h5 className="font-bold">SUPPORT</h5>
                 <p>Help Centre</p>
-                <p>Trust & Safety</p>
+                <p>Trust &amp; Safety</p>
                 <p>Say Hi Youtube</p>
                 <p>Easter Eggs</p>
                 <p>For the Win</p>
