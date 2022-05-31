@@ -10,17 +10,31 @@ import { useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { useRouter } from "next/router";
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [numOfGuests, setNumOfGuests] = useState(1);
+  const router =useRouter()
 
   const handleSelect = (range) => {
     setStartDate(range.selection.startDate);
     setEndDate(range.selection.endDate);
   };
+
+  const search = ()=>{
+    router.push({
+      pathname:'/search',
+      query:{
+        location:searchInput,
+        startDate:startDate.toISOString(),
+        endDate:endDate.toISOString(),
+        numOfGuests,
+      }
+    })
+  }
 
   const selectionRange = {
     startDate,
@@ -31,7 +45,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md p-5 md:px-10">
       {/* Left */}
-      <div className="relative flex items-center h-10 cursor-pointer my-auto">
+      <div onClick={()=>router.push('/')} className="relative flex items-center h-10 cursor-pointer my-auto">
         <Image
           src="https://links.papareact.com/qd3"
           layout="fill"
@@ -67,7 +81,7 @@ const Header = () => {
         <div className="flex flex-col col-span-3 mx-auto">
           <DateRangePicker
             ranges={[selectionRange]}
-            minDate={new Date()}
+            minDate={new Date()} 
             rangeColors={["#FD5B61"]}
             onChange={handleSelect}
           />
@@ -87,7 +101,7 @@ const Header = () => {
           </div>
           <div className="flex">
             <button className="flex-grow text-gray-500" onClick={()=>setSearchInput('')}>Cancel</button>
-            <button className="flex-grow text-red-400">Search</button>
+            <button onClick={search} className="flex-grow text-red-400">Search</button>
           </div>
         </div>
       )}
