@@ -45,12 +45,14 @@ const MyMap = ({ searchResults }) => {
                     >📍</p> 
                 </Marker>
 
-                {selectedLocation.long == result.long && (
+                {selectedLocation.long === result.long && (
                     <Popup
-                    // onClose={()=>setSelectedLocation({})}
-                    closeOnClick={true}
+                    onClose={()=>setSelectedLocation({})}
+                    closeOnClick={false}
+                    closeButton={true}
                     latitude={result.lat}
                     longitude={result.long}
+                    offset={[0, -20]}
                     >
                         {result.title}
                     </Popup>
